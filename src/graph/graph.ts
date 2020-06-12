@@ -2794,7 +2794,10 @@ export default class Graph extends EventEmitter implements IGraph {
   /**
    * 获取 undo 和 redo 栈的数据
    */
-  public getStackData() {
+  public getStackData(): {
+    undoStack: GraphData[];
+    redoStack: GraphData[]
+  } {
     return {
       undoStack: this.undoStack.toArray(),
       redoStack: this.redoStack.toArray()
@@ -2864,6 +2867,11 @@ export default class Graph extends EventEmitter implements IGraph {
     this.undoStack.push({
       action,
       data: stackData
+    })
+
+    this.emit('stackchange', {
+      undoStack: this.undoStack,
+      redoStack: this.redoStack
     })
   }
 
