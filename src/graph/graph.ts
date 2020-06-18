@@ -25,7 +25,8 @@ import {
   ModeOption,
   ModeType,
   States,
-  ComboTree
+  ComboTree,
+  StackData
 } from '../types';
 import { getAllNodeInGroups } from '../util/group';
 import { move } from '../util/math';
@@ -43,8 +44,6 @@ import {
 import PluginBase from '../plugins/base';
 import createDom from '@antv/dom-util/lib/create-dom';
 import { plainCombosToTrees, traverseTree, reconstructTree, traverseTreeUp } from '../util/graphic';
-import degree from '../algorithm/degree';
-import Stack from '../algorithm/structs/stack'
 import degree from '../algorithm/degree';
 import Stack from '../algorithm/structs/stack'
 
@@ -2795,8 +2794,8 @@ export default class Graph extends EventEmitter implements IGraph {
    * 获取 undo 和 redo 栈的数据
    */
   public getStackData(): {
-    undoStack: GraphData[];
-    redoStack: GraphData[]
+    undoStack: StackData[];
+    redoStack: StackData[]
   } {
     return {
       undoStack: this.undoStack.toArray(),
