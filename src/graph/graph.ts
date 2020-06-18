@@ -2803,7 +2803,9 @@ export default class Graph extends EventEmitter implements IGraph {
    */
   public destroy() {
     this.clear();
-
+    // 清空栈数据
+    this.clearStack();
+    
     each(this.get('plugins'), plugin => {
       plugin.destroyPlugin();
     });
